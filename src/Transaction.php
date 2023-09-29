@@ -58,6 +58,16 @@ class Transaction extends RaveImplementAbstract
         return $this->rave->verifyTransaction($id);
     }
 
+    public function verifyTransactionByReference($tx_ref)
+    {
+        //set the payment handler
+        $this->rave->eventHandler($this->getEventHandler())
+        //set the endpoint for the api call
+        ->setEndPoint("v3/transactions/".$tx_ref."/find");
+        //returns the value from the results
+        return $this->rave->verifyTransactionByReference($tx_ref);
+    }
+
     public function validateTransaction($otp, $ref, $type)
     {
         //set the payment handler

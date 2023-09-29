@@ -874,6 +874,25 @@ class Rave
         return json_decode($result, true);
     }
 
+     /**
+    * verify the transaction before giving value to your customers
+    *  @param string
+    *  @return object
+    * */
+    public function verifyTransactionByReference($tx_ref = null)
+    {
+        Log::notice('Verifying transaction...');
+
+        $url = "";
+        if (isset($tx_ref)) {
+            $url = "/verify_by_reference?tx_ref=".$tx_ref;
+            $this->setEndPoint("v3/transactions");
+        }
+
+        $result  = $this->getURL($url);
+        return json_decode($result, true);
+    }
+
     /**
     * Validate the transaction to be charged
     *  @param string
